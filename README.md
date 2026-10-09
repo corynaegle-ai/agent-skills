@@ -1,6 +1,8 @@
 # Agent Skills
 
-Reusable engineering workflows adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills), based on upstream commit `49dd158d1076134a641b33efb035946536778336`. The upstream MIT copyright and Git history are preserved. This is an independent fork maintained by Cory Naegle; upstream has not endorsed these changes.
+The original code and skills in this repository were created by [Matt Pocock](https://github.com/mattpocock) and published in [mattpocock/skills](https://github.com/mattpocock/skills). This fork is based on upstream commit `49dd158d1076134a641b33efb035946536778336` and preserves the original MIT copyright and Git history.
+
+Some skills have been modified by Cory Naegle for his own use and workflows. Those adaptations are summarized in [Changes from upstream](#changes-from-upstream). This is an independent fork maintained by Cory Naegle; Matt Pocock has not endorsed these changes.
 
 ## Install once, use across projects
 
