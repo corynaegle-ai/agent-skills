@@ -1,6 +1,6 @@
 ---
 name: improve-codebase-architecture
-description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+description: Review architecture in a visual HTML report; explore a chosen improvement by interview when requested.
 disable-model-invocation: true
 ---
 
@@ -10,6 +10,14 @@ If the host has no Skill tool, read the named installed skill’s `SKILL.md` and
 # Improve Codebase Architecture
 
 Surface architectural friction and propose **deepening opportunities**: refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
+
+## Default invocation
+
+Review the current project. Use recent Git history to select one frequently changed subsystem unless the user specifies a scope.
+
+Present up to three worthwhile improvements with concrete file and call-site references, tradeoffs, testing benefits, and before/after diagrams. Generate the HTML report in the OS temporary directory and open it.
+
+Leave repository files, tickets, and Git state unchanged. Stop after the report; begin the design interview only when requested. If no worthwhile opportunities exist, say so rather than inventing candidates.
 
 This command is _informed_ by the project's domain model and built on a shared design vocabulary:
 
@@ -23,7 +31,7 @@ This command is _informed_ by the project's domain model and built on a shared d
 **Scope before you scan: YAGNI.** Deepening a module pays off by making future changes to it easier, so put extra weight on the parts of the codebase that have recently changed. Decide *where* to look before you look:
 
 - If the user named a direction (a module, a subsystem, a pain point), take it, and skip the inference below.
-- Otherwise, walk back a good stretch of the commit history (`git log --oneline`) to find the codebase's hot spots, the files and areas that keep coming up, and let those paths pull your attention first. If the changes are scattered with no clear hot spot, widen the net.
+- Otherwise, walk back a good stretch of the commit history (`git log --oneline`) to find the files and areas that keep coming up. Select one frequently changed subsystem for this review. If no clear hot spot emerges, choose one coherent subsystem and explain the choice in the report.
 
 Read the project's domain glossary (`GLOSSARY.md`) and any ADRs in the area you're touching first.
 
@@ -49,10 +57,11 @@ For each candidate, render a card with:
 - **Problem**: why the current architecture is causing friction
 - **Solution**: plain English description of what would change
 - **Benefits**: explained in terms of locality and leverage, and how tests would improve
+- **Tradeoffs**: costs, risks, and when the change would not pay off
 - **Before / After diagram**: side-by-side, custom-drawn, illustrating the shallowness and the deepening
 - **Recommendation strength**: one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
 
-End the report with a **Top recommendation** section: which candidate you'd tackle first and why.
+End the report with a **Top recommendation** section: which candidate you'd tackle first and why. If no candidate is worthwhile, explain that finding instead.
 
 **Use GLOSSARY.md vocabulary for the domain, and the `/codebase-design` vocabulary for the architecture.** If `GLOSSARY.md` defines "Order," talk about "the Order intake module," not "the FooBarHandler," and not "the Order service."
 
@@ -60,13 +69,13 @@ End the report with a **Top recommendation** section: which candidate you'd tack
 
 See [HTML-REPORT.md](HTML-REPORT.md) for the full HTML scaffold, diagram patterns, and styling guidance.
 
-Do NOT propose interfaces yet. After the file is written, ask the user: "Which of these would you like to explore?"
+Do NOT propose interfaces yet. After opening the report, tell the user its absolute path and stop. The user can request a design interview about a candidate in a follow-up.
 
 ### 3. Grilling loop
 
-Once the user picks a candidate, call the Skill tool with "grilling" to walk the decision tree with them: constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.
+Only when the user requests a design interview about a candidate, call the Skill tool with "grilling" to walk the decision tree with them: constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive. Picking a candidate for discussion does not authorize implementation or repository edits.
 
-Side effects happen inline as decisions crystallize; call the Skill tool with "domain-modeling" to keep the domain model current as you go:
+Keep proposed glossary and ADR changes in the conversation unless the user authorizes documentation edits. When those edits are authorized, call the Skill tool with "domain-modeling" to keep the domain model current as decisions crystallize:
 
 - **Naming a deepened module after a concept not in `GLOSSARY.md`?** Add the term to `GLOSSARY.md`. Create the file lazily if it doesn't exist.
 - **Sharpening a fuzzy term during the conversation?** Update `GLOSSARY.md` right there.

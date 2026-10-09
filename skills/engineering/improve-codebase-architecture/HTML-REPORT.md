@@ -49,6 +49,7 @@ Each candidate is one `<article>`:
 - **Before / After diagram**: the centrepiece. Two columns, side by side. See patterns below.
 - **Problem**: one sentence. What hurts.
 - **Solution**: one sentence. What changes.
+- **Tradeoffs**: concrete costs, risks, and when the change would not pay off.
 - **Wins**: bullets, ≤6 words each. e.g. "Tests hit one interface", "Pricing logic stops leaking", "Delete 4 shallow wrappers".
 - **ADR callout** (if applicable): one line in an amber-tinted box.
 
@@ -101,7 +102,7 @@ Before: a tree of function calls rendered as nested boxes. After: the same tree 
 
 ## Top recommendation section
 
-One larger card. Candidate name, one sentence on why, anchor link to its card. That's it.
+One larger card. Candidate name, one sentence on why, anchor link to its card. If no worthwhile candidates were found, replace this card with a brief explanation of that finding.
 
 ## Tone
 
