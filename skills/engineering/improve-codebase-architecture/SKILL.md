@@ -1,6 +1,7 @@
 ---
 name: improve-codebase-architecture
-description: Review architecture in a visual HTML report; explore a chosen improvement by interview when requested.
+description: Review architecture in a visual HTML report; use full for the whole codebase or omit it for a focused review.
+argument-hint: "[full] [scope]"
 disable-model-invocation: true
 ---
 
@@ -11,13 +12,39 @@ If the host has no Skill tool, read the named installed skill’s `SKILL.md` and
 
 Surface architectural friction and propose **deepening opportunities**: refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
 
-## Default invocation
+## Invocation modes
+
+Resolve the mode before choosing where to look. Read the invocation arguments from `$ARGUMENTS` when the host expands them, or from the user's invocation message otherwise. A leading standalone `full` argument selects the full invocation below; it is a mode keyword, not a subsystem name. Without `full`, use the default invocation. A path or phrase that merely contains the word "full" does not select full mode.
+
+### Default invocation
 
 Review the current project. Use recent Git history to select one frequently changed subsystem unless the user specifies a scope.
 
 Present up to three worthwhile improvements with concrete file and call-site references, tradeoffs, testing benefits, and before/after diagrams. Generate the HTML report in the OS temporary directory and open it.
 
 Leave repository files, tickets, and Git state unchanged. Stop after the report; begin the design interview only when requested. If no worthwhile opportunities exist, say so rather than inventing candidates.
+
+### Full invocation
+
+For `improve-codebase-architecture full`, apply this embedded prompt:
+
+```text
+Review the entire project codebase.
+
+Override the default focus on one recently changed subsystem.
+Map the major applications, shared packages, and their dependencies,
+then examine each area for architectural friction.
+
+Include stable and older code. Remove the three-recommendation limit
+and report all worthwhile findings, ranked by impact and effort.
+
+Include a coverage summary showing which areas were examined and
+which remain unchecked. Keep the run report-only.
+```
+
+Both modes preserve repository files, tickets, and Git state, write the report outside the repository, open it, and stop. The full invocation overrides the default scope and candidate limit. It does not start the design interview or authorize implementation. If no worthwhile opportunities exist, report that finding.
+
+## Shared design context
 
 This command is _informed_ by the project's domain model and built on a shared design vocabulary:
 
@@ -28,10 +55,11 @@ This command is _informed_ by the project's domain model and built on a shared d
 
 ### 1. Explore
 
-**Scope before you scan: YAGNI.** Deepening a module pays off by making future changes to it easier, so put extra weight on the parts of the codebase that have recently changed. Decide *where* to look before you look:
+**Scope before you scan: YAGNI.** Decide where to look using the selected invocation mode:
 
-- If the user named a direction (a module, a subsystem, a pain point), take it, and skip the inference below.
-- Otherwise, walk back a good stretch of the commit history (`git log --oneline`) to find the files and areas that keep coming up. Select one frequently changed subsystem for this review. If no clear hot spot emerges, choose one coherent subsystem and explain the choice in the report.
+- **Full:** inventory the project's major applications, shared packages, other owned source areas, and their dependencies. Examine each area, including stable and older code. Use recent history as context without restricting coverage. Keep a ledger of area/path, dependencies, review status, and remaining work across exploration passes. Name exclusions such as generated or vendored code. If limits prevent completion, identify unchecked or blocked areas and their reasons rather than claiming a complete review.
+- **Default with a named direction** (a module, subsystem, or pain point): use that scope and skip history-based inference.
+- **Default without a named direction:** walk back a good stretch of the commit history (`git log --oneline`) to find the files and areas that keep coming up. Select one frequently changed subsystem for this review. If no clear hot spot emerges, choose one coherent subsystem and explain the choice in the report.
 
 Read the project's domain glossary (`GLOSSARY.md`) and any ADRs in the area you're touching first.
 
@@ -61,6 +89,8 @@ For each candidate, render a card with:
 - **Tradeoffs**: costs, risks, and when the change would not pay off
 - **Before / After diagram**: side-by-side, custom-drawn, illustrating the shallowness and the deepening
 - **Recommendation strength**: one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
+
+In full mode, include the project/dependency map and coverage summary from the exploration ledger. Show examined, unchecked, blocked, and excluded areas with paths and reasons where applicable. Include every worthwhile finding without the default three-candidate cap. Give each finding an impact and effort estimate with a short rationale, then rank by impact first and effort second. Assign recommendation numbers after ranking so report order and follow-up selections agree.
 
 End the report with a **Top recommendation** section: which candidate you'd tackle first and why. If no candidate is worthwhile, explain that finding instead.
 

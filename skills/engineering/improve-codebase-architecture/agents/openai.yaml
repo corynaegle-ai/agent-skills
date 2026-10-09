@@ -1,5 +1,5 @@
 interface:
   display_name: "Improve Codebase Architecture"
-  short_description: "Find and grill architecture improvements"
+  short_description: "Review recent code or the whole project"
 policy:
   allow_implicit_invocation: false

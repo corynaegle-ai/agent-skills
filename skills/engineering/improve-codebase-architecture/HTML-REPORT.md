@@ -37,6 +37,8 @@ The architectural review is rendered as a single self-contained HTML file in the
 
 Repo name, date, and a compact legend: solid box = module, dashed line = seam, red arrow = leakage, thick dark box = deep module. No introduction paragraph. Straight into the candidates.
 
+For full mode, show the project/dependency map before the candidates and add a coverage table listing each major area and its paths as examined, unchecked, blocked, or excluded. Explain gaps and exclusions. Include stable and older areas; recent Git activity must not define coverage. Display all worthwhile findings, ranked by impact first and effort second, with visible impact/effort estimates and their rationale. Number candidates after ranking. These full-mode sections take precedence over the default instruction to go straight into candidates.
+
 ## Candidate card
 
 The diagrams carry the weight. Prose is sparse, plain, and uses the glossary terms (from the `/codebase-design` skill) without ceremony.
