@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Tests"
+  short_description: "Find and fix low-value, coupled, or brittle tests"
+  default_prompt: "Use $review-tests to audit and correct this repository's tests, verify regression sensitivity, and summarize every issue found and fixed."
+policy:
+  allow_implicit_invocation: true

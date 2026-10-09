@@ -12,6 +12,10 @@ Select explicitly when unsure which skill fits. Only the recommended six are lin
 
 No. Use the focused skill and existing project conventions. Basic debugging, design, and local review need no tracker setup.
 
+**Which skill reviews whether tests provide value?**
+
+Use [review-tests](review-tests.md) to audit and correct existing tests for real execution, independent assertions, refactor resilience, and reliability. Use [tdd](tdd.md) for new test-first implementation and [code-review](code-review.md) for a general change review.
+
 **What changed in this fork?**
 
 Routine choices reuse authorization, review captures uncommitted work, and parallel builds are bounded and verify the combined result.

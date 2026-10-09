@@ -101,14 +101,28 @@ class InstallTests(unittest.TestCase):
         names = installer.select_skills(self.skills, ["implement-recommendation"], deps)
         self.assertEqual(set(names), {"implement-recommendation", "tdd", "code-review", "codebase-design"})
 
-    def test_recommended_and_full_selection_exclude_experiments(self):
+    def test_recommended_selection_preserves_defaults_and_excludes_experiments(self):
         config = json.loads((ROOT / "skills.json").read_text())
         names = installer.select_skills(self.skills, config["recommended"], config["dependencies"])
-        self.assertEqual(len(names), 6)
+        self.assertEqual(set(names), {"diagnosing-bugs", "domain-modeling", "codebase-design",
+                                      "retro", "to-tickets", "writing-for-agents"})
         plugin = json.loads((ROOT / ".claude-plugin/plugin.json").read_text())
         self.assertEqual(set(self.skills), {Path(path).name for path in plugin["skills"]})
         self.assertNotIn("loop-me", self.skills)
         self.assertNotIn("setup-pre-commit", self.skills)
+
+    def test_catalog_promotes_only_supported_buckets(self):
+        source = (self.directory / "catalog-fixture").resolve()
+        for bucket, name in (("engineering", "build"), ("productivity", "focus"),
+                             ("in-progress", "experiment"), ("misc", "extra"),
+                             ("deprecated", "retired")):
+            folder = source / "skills" / bucket / name
+            folder.mkdir(parents=True)
+            (folder / "SKILL.md").write_text("Synthetic skill\n")
+        with mock.patch.object(installer, "REPO", source):
+            result = installer.catalog()
+        self.assertEqual(result, {"build": source / "skills/engineering/build",
+                                  "focus": source / "skills/productivity/focus"})
 
     def test_invalid_skill_and_dependency_cycle_fail(self):
         for name, deps in (("../outside", {}), ("retro", {"retro": ["retro"]})):
@@ -117,10 +131,16 @@ class InstallTests(unittest.TestCase):
 
     def test_cli_custom_destination_works_from_another_directory(self):
         result = subprocess.run(["bash", str(ROOT / "scripts/link-skills.sh"),
-                                 "--skill", "pr", "--destination", str(self.destination)],
+                                 "--skill", "review-tests", "--destination", str(self.destination)],
                                 cwd=self.directory, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertTrue((self.destination / "pr" / "SKILL.md").is_file())
+        link = self.destination / "review-tests"
+        self.assertEqual(link.resolve(), ROOT / "skills/engineering/review-tests")
+        self.assertTrue((link / "SKILL.md").is_file())
+        self.assertTrue((link / "references/review-cases.md").is_file())
+        self.assertTrue((link / "references/sources.md").is_file())
+        self.assertTrue((link / "agents/openai.yaml").is_file())
+        self.assertTrue((link / "evals/evals.json").is_file())
 
 
 class SnapshotTests(unittest.TestCase):

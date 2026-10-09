@@ -22,4 +22,4 @@ claude plugin marketplace add corynaegle-ai/agent-skills
 claude plugin install corynaegle-agent-skills@corynaegle-ai
 ```
 
-The plugin opts into all 27 promoted skills. Use either shared links or a plugin for a given agent, avoiding duplicate skills. Plugin update behavior belongs to the host; this fork does not promise automatic updates across hosts.
+The plugin opts into all promoted skills. Use either shared links or a plugin for a given agent, avoiding duplicate skills. Plugin update behavior belongs to the host; this fork does not promise automatic updates across hosts.

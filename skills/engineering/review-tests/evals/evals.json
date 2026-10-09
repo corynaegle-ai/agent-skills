@@ -1,0 +1,48 @@
+{
+  "skill_name": "review-tests",
+  "evals": [
+    {
+      "id": 1,
+      "name": "oracles-and-real-code",
+      "baseline": {"tests": 6, "skipped": 0},
+      "prompt": "Use review-tests to review and correct all tests in this fixture. Follow CONTRACT.md, fix any narrow production defect the stronger tests expose, and give me a summary of every issue found and fixed. Verify important repairs against actual regressions. Work only in your disposable fixture copy.",
+      "files": ["fixtures/oracles/CONTRACT.md", "fixtures/oracles/orders.py", "fixtures/oracles/suite.py"],
+      "expectations": [
+        "Replacements exercise the real total function and use independently known outcomes.",
+        "The self-derived expected value and source-string check are replaced or removed with behavioral coverage preserved.",
+        "Invalid quantities have specific failure assertions and accepted neighboring cases remain covered.",
+        "The boolean-quantity production defect is caught and corrected against CONTRACT.md.",
+        "The published ORDER_LIMIT=4 compatibility check is retained.",
+        "A meaningful temporary production regression triggers the intended assertion; restoration and green checks are recorded."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "worker-results-and-cleanup",
+      "baseline": {"tests": 2, "skipped": 0},
+      "prompt": "Use review-tests to improve the tests in this fixture. Keep production behavior as specified in CONTRACT.md. Check that the tests assert useful results and handle asynchronous failures and cleanup reliably. Summarize corrections and verification. Work only in your disposable fixture copy.",
+      "files": ["fixtures/reliability/CONTRACT.md", "fixtures/reliability/worker.py", "fixtures/reliability/suite.py"],
+      "expectations": [
+        "The background test coordinates worker progress instead of assuming it after a sleep.",
+        "It checks the actual callback result and propagates callback failures to the test thread.",
+        "Release and bounded cleanup remain guaranteed if an assertion fails.",
+        "The real deadline test and no-callback guarantee are retained.",
+        "Production behavior remains intact and verification limits are stated."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "review-only-and-valid-contracts",
+      "baseline": {"tests": 3, "skipped": 1},
+      "prompt": "Use review-tests to review every test in this fixture, findings only. Do not edit or mutate any file. Follow CONTRACT.md and summarize all findings, valuable checks retained, baseline counts, skips, and limits.",
+      "files": ["fixtures/review-only/CONTRACT.md", "fixtures/review-only/sender.py", "fixtures/review-only/suite.py"],
+      "expectations": [
+        "Every fixture file remains byte-for-byte unchanged.",
+        "The source-string test is reported as structure-sensitive with a behavioral replacement proposed.",
+        "The one-send interaction and exact versioned payload are recognized as real contracts, not automatically removed.",
+        "The unavailable live-service test is reported as skipped rather than validated.",
+        "The report distinguishes source review, execution, and unexecuted proposed regression checks."
+      ]
+    }
+  ]
+}
