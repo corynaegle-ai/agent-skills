@@ -98,12 +98,15 @@ class InstallTests(unittest.TestCase):
         self.assertEqual(set(names), {"improve-codebase-architecture", "grilling", "domain-modeling", "codebase-design"})
         names = installer.select_skills(self.skills, ["implement-spec"], deps)
         self.assertEqual(set(names), {"implement-spec", "tdd", "code-review", "codebase-design", "pr"})
+        names = installer.select_skills(self.skills, ["implement-recommendation"], deps)
+        self.assertEqual(set(names), {"implement-recommendation", "tdd", "code-review", "codebase-design"})
 
     def test_recommended_and_full_selection_exclude_experiments(self):
         config = json.loads((ROOT / "skills.json").read_text())
         names = installer.select_skills(self.skills, config["recommended"], config["dependencies"])
         self.assertEqual(len(names), 6)
-        self.assertEqual(len(self.skills), 27)
+        plugin = json.loads((ROOT / ".claude-plugin/plugin.json").read_text())
+        self.assertEqual(set(self.skills), {Path(path).name for path in plugin["skills"]})
         self.assertNotIn("loop-me", self.skills)
         self.assertNotIn("setup-pre-commit", self.skills)
 

@@ -26,6 +26,10 @@ No. It reads `GLOSSARY.md` and relevant ADRs when present and uses the project's
 
 The default run stops after the report. Request a design interview about a candidate to explore constraints, dependencies, interfaces, and testing through [grilling](../productivity/grilling.md). Proposed glossary and ADR changes stay in the conversation unless you authorize documentation edits. Implementation is a separate task.
 
+**How do I implement one of the recommendations?**
+
+Candidates are numbered from 1 in display order. Use [implement-recommendation](./implement-recommendation.md) with the selected number in the same conversation, or supply both the number and report path in a new one.
+
 **Why are the report's styling or diagrams missing?**
 
 The default report loads Tailwind and Mermaid from CDNs, so those assets need network access. For an offline or restricted browser, request inline CSS and SVG diagrams instead.

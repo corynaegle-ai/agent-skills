@@ -53,6 +53,7 @@ The report uses **Tailwind via CDN** for layout and styling, and **Mermaid via C
 
 For each candidate, render a card with:
 
+- **Recommendation number**: sequential from 1 in display order; use the same number in the report and conversation so the user can select it with `implement-recommendation`
 - **Files**: which files/modules are involved
 - **Problem**: why the current architecture is causing friction
 - **Solution**: plain English description of what would change

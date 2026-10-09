@@ -31,6 +31,11 @@
       "tdd",
       "code-review"
     ],
+    "implement-recommendation": [
+      "codebase-design",
+      "tdd",
+      "code-review"
+    ],
     "implement-spec": [
       "tdd",
       "code-review",

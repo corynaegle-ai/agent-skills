@@ -59,6 +59,8 @@ Not feature work, just upkeep.
 
 - **`/improve-codebase-architecture`** reviews the current project and opens a report with up to three **deepening opportunities**, leaving repository files, tickets, and Git state unchanged. Without a named scope, it selects one frequently changed subsystem. It stops after the report; request a design interview about a candidate to explore it further. **`/codebase-design`** (below) supplies the design vocabulary.
 
+For a chosen architecture candidate, use **`/implement-recommendation <number> [report-path]`** to implement that recommendation under the current project's coding workflow. It resolves the candidate from the conversation or supplied report, checks it against current code, and verifies/reviews task-owned changes before authorized publication.
+
 ## Vocabulary underneath
 
 Two model-invoked references that run *beneath* the other skills, each the single source of truth for its vocabulary. Reach for them directly when the **words**, not the process, are the problem; or let the skills above pull them in.
