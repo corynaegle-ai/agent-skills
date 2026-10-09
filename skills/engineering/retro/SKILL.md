@@ -4,6 +4,9 @@ description: "Conduct a retrospective on a coding session."
 disable-model-invocation: true
 ---
 
+If the host has no Skill tool, read the named installed skill’s `SKILL.md` and relevant references directly.
+
+
 The user has asked for a **retrospective**. You are suggesting improvements to the coding agent's **environment** to improve future runs.
 
 ## Steps

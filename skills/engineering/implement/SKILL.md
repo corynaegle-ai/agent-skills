@@ -1,17 +1,15 @@
 ---
 name: implement
-description: "Implement a piece of work based on a spec or set of tickets."
+description: "Implement authorized work from a conversation, spec, or ticket, then verify and review the completed changes."
 disable-model-invocation: true
 ---
 
-Implement the work described by the user in the spec or tickets.
+Implement the authorized work described by the conversation, spec, or ticket. Fetch any supplied tracker reference and state its title; ask if the reference is ambiguous. Reuse settled decisions.
 
-If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
+Before editing, record the task-start commit, dirty paths, and staged changes. Preserve unrelated work and use an isolated branch/worktree when needed. Identify acceptance criteria and existing test boundaries.
 
-Call the Skill tool with "tdd" where possible, at pre-agreed seams.
+Load `tdd` for behavioral changes that warrant new tests. Use the available skill tool or read the installed skill's `SKILL.md` and conditional references. Run focused checks while changing code, then the repository's required checks and relevant integration suite on the completed result. State unavailable checks and their practical limits.
 
-Run typechecking regularly, single test files regularly, and the full test suite once at the end.
+Load `code-review` with the task-start commit, worktree scope, acceptance criteria, and paths owned by this task. Review staged, unstaged, and new files before the final commit. Fix actionable findings within scope, verify each correction, and rerun affected checks. Use an independent reviewer when available and permitted; otherwise disclose shared context.
 
-Once done, call the Skill tool with "code-review" to review the work.
-
-Commit your work to the current branch.
+Commit task-owned changes when authorized by the user or project workflow. Stage named paths or hunks and preserve the unrelated index/worktree. Pushes, issue closure, PR publication, deployment, signing, and physical acceptance are separate actions and claims. Perform those already authorized and required by the task, and report their actual results.

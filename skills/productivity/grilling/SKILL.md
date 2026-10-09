@@ -1,30 +1,12 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
+description: Stress-test a plan or decision through focused questions when the user requests an interview or unresolved choices materially affect the work.
 ---
 
-Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
+Map unresolved decisions as a design tree. Reuse decisions and authorization already supplied by the user; inspect files and tools for facts rather than asking the user to look them up. Delegate factual exploration only when available and permitted.
 
-Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
+Ask a small round of independent questions, usually one to three, with a concise recommendation and the consequence of the choice. Use the host's question UI when available, otherwise numbered chat questions. Word questions so "yes" accepts the recommendation. Wait for answers before taking dependent actions; continue independent authorized work while waiting.
 
-Format a round like so:
+Resolve product, scope, and significant architecture choices with the user. Make routine reversible implementation choices yourself and state assumptions where they matter. Recompute the decision frontier after each answer and ask only questions that could change the result. Follow any user-requested interview depth or limit.
 
-```
-❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
-
-➡️ <your recommended answer>
-
----
-
-❓ **Q2** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
-
-➡️ <your recommended answer>
-```
-
-Word each question so "yes" accepts your recommended answer.
-
-Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
-
-Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent to find it; don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; ask the rest of the frontier now. The _decisions_ are the user's: put each to them and wait.
-
-The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
+A planning-only interview ends with the agreed decisions and remaining uncertainties. It does not authorize implementation. If the user already requested implementation, continue that work after material decisions are settled without adding another generic confirmation gate. Stop asking when the remaining choices can be handled within existing instructions and authorization.

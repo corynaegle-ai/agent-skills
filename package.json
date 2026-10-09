@@ -1,17 +1,19 @@
 {
-  "name": "mattpocock-skills",
-  "version": "1.3.1",
+  "name": "agent-skills",
+  "version": "1.0.0",
   "private": true,
-  "description": "Matt Pocock's agent skills for real engineering",
+  "description": "Reusable engineering skills adapted for autonomous work across projects",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mattpocock/skills"
+    "url": "https://github.com/corynaegle-ai/agent-skills"
   },
   "license": "MIT",
   "scripts": {
     "changeset": "changeset",
     "version": "changeset version && node scripts/sync-plugin-version.mjs",
-    "check-plugin-version": "node scripts/sync-plugin-version.mjs --check"
+    "check-plugin-version": "node scripts/sync-plugin-version.mjs --check",
+    "check": "python3 scripts/check-repo.py && python3 -m unittest discover -s tests -v && node scripts/sync-plugin-version.mjs --check",
+    "test": "python3 -m unittest discover -s tests -v"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",

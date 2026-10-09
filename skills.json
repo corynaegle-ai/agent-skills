@@ -1,0 +1,49 @@
+{
+  "recommended": [
+    "diagnosing-bugs",
+    "domain-modeling",
+    "codebase-design",
+    "retro",
+    "to-tickets",
+    "writing-for-agents"
+  ],
+  "dependencies": {
+    "grill-me": [
+      "grilling"
+    ],
+    "grill-with-docs": [
+      "grilling",
+      "domain-modeling"
+    ],
+    "triage": [
+      "grilling",
+      "domain-modeling"
+    ],
+    "improve-codebase-architecture": [
+      "codebase-design",
+      "grilling",
+      "domain-modeling"
+    ],
+    "tdd": [
+      "codebase-design"
+    ],
+    "implement": [
+      "tdd",
+      "code-review"
+    ],
+    "implement-spec": [
+      "tdd",
+      "code-review",
+      "pr"
+    ],
+    "wayfinder": [
+      "grilling",
+      "domain-modeling",
+      "prototype",
+      "research"
+    ],
+    "retro": [
+      "writing-for-agents"
+    ]
+  }
+}

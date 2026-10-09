@@ -1,3 +1,16 @@
+# Agent Skills
+
+## 1.0.0 (independent fork)
+
+- Preserve upstream history and MIT attribution from commit 49dd158.
+- Add non-destructive selective user-scope installation and dependency closure.
+- Capture complete pre-commit review snapshots without rewriting the checkout or index.
+- Reuse existing authorization for routine testing and planning choices.
+- Bound worker concurrency and require combined integration verification.
+- Add isolated functional tests and Linux/macOS CI checks.
+
+## Upstream changelog
+
 # mattpocock-skills
 
 ## 1.3.1

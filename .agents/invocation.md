@@ -24,3 +24,7 @@ This whole convention only holds when the named skill is **model-invoked**. A us
 ## Passive vs active domain work
 
 Merely _reading_ `GLOSSARY.md` for vocabulary is a one-line prose pointer, not the `domain-modeling` skill. Only the active build/sharpen discipline (challenge terms, edge-case scenarios, write ADRs, update `GLOSSARY.md` inline) is `domain-modeling`.
+
+## Hosts without a Skill tool
+
+Read the named installed skill’s `SKILL.md` and relevant references directly. Selective installation resolves dependencies from `skills.json`. A missing optional skill should be named explicitly rather than silently improvised.

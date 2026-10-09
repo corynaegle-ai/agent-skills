@@ -1,13 +1,12 @@
 {
-  "name": "mattpocock-skills",
-  "version": "1.3.1",
-  "description": "Matt Pocock's agent skills for real engineering: grilling, spec/ticket flows, TDD, code review, domain modelling and more. Plug-and-play, not vibe coding.",
+  "name": "corynaegle-agent-skills",
+  "version": "1.0.0",
+  "description": "Engineering skills with safe shared installation, complete worktree review, and verified integration.",
   "author": {
-    "name": "Matt Pocock",
-    "url": "https://www.aihero.dev"
+    "name": "Cory Naegle"
   },
-  "homepage": "https://www.aihero.dev/s/skills-newsletter",
-  "repository": "https://github.com/mattpocock/skills",
+  "homepage": "https://github.com/corynaegle-ai/agent-skills",
+  "repository": "https://github.com/corynaegle-ai/agent-skills",
   "license": "MIT",
   "keywords": [
     "engineering",

@@ -4,6 +4,9 @@ description: Move issues and external PRs through a state machine of triage role
 disable-model-invocation: true
 ---
 
+If the host has no Skill tool, read the named installed skill’s `SKILL.md` and relevant references directly.
+
+
 # Triage
 
 Move issues on the project issue tracker through a small state machine of triage roles.
